@@ -1,6 +1,6 @@
 {
   "name": "checkout-install",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pull upstream changes, re-run npm install and setup links",
   "preferGlobal": true,
   "bin": {
