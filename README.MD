@@ -60,7 +60,7 @@ If using a config file or package.json config, you can pass multiple repositorie
 }
 ```
 
-[npm-badge]: https://badge.fury.io/js/checkout-install.svg
+[npm-image]: https://badge.fury.io/js/checkout-install.svg
 [npm-url]: https://badge.fury.io/js/checkout-install
 
 [dep-image]: https://david-dm.org/tswaters/checkout-install/status.svg
