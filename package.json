@@ -1,0 +1,41 @@
+{
+  "name": "checkout-install",
+  "version": "1.0.0",
+  "description": "Pull upstream changes, re-run npm install and setup links",
+  "preferGlobal": true,
+  "bin": {
+    "checkout-install": "bin/checkout-install.js"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=7.6"
+  },
+  "keywords": [
+    "git",
+    "checkout",
+    "npm",
+    "install",
+    "link",
+    "links"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tswaters/checkout-install.git"
+  },
+  "author": {
+    "name": "Tyler Waters",
+    "email": "tyler.waters@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.8.0"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "pino": "^4.7.2",
+    "rimraf": "^2.6.2",
+    "yargs": "^9.0.1"
+  }
+}
