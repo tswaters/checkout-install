@@ -10,8 +10,12 @@
     "lint": "eslint ."
   },
   "engines": {
-    "node": ">=7.6"
+    "node": ">8"
   },
+  "files": [
+    "bin",
+    "lib"
+  ],
   "keywords": [
     "git",
     "checkout",
