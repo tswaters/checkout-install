@@ -61,15 +61,17 @@ logger.level = config.logLevel
 
 logger.debug(`started ${config.config ? `config path: ${path.resolve(config.config)}` : ''}`)
 
+const installer = pullInstall(logger)
+
 ;(async () => {
 
   await ensureConfig(config)
   logger.trace(`Running with config: ${util.inspect(config)}`)
 
   if (config.repositories) {
-    await Promise.all(config.repositories.map(pullInstall))
+    await Promise.all(config.repositories.map(installer))
   } else {
-    await pullInstall(config)
+    await pullInstall(installer)
   }
 
 })()
