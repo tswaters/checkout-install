@@ -7,7 +7,9 @@
     "checkout-install": "bin/checkout-install.js"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "pretest": "rimraf coverage",
+    "test": "nyc --reporter=text --reporter=html mocha"
   },
   "engines": {
     "node": ">8"
@@ -40,7 +42,11 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^4.8.0"
+    "eslint": "^4.8.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "proxyquire": "^1.8.0",
+    "sinon": "^4.0.1"
   },
   "dependencies": {
     "chalk": "^2.1.0",
