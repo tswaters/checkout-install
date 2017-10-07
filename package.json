@@ -7,6 +7,7 @@
     "checkout-install": "bin/checkout-install.js"
   },
   "scripts": {
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint .",
     "pretest": "rimraf coverage",
     "test": "nyc --reporter=text --reporter=html mocha"
@@ -42,6 +43,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "coveralls": "^3.0.0",
     "eslint": "^4.8.0",
     "mocha": "^4.0.1",
     "nyc": "^11.2.1",

@@ -2,6 +2,8 @@
 [![NPM Version][npm-image]][npm-url]
 [![Dependencies][dep-image]][dep-url]
 [![devDependencies][devdep-image]][devdep-url]
+[![Coverage Status][coverage-image]][coverage-url]
+[![Build Status][build-image]][build-url]
 
 # checkout-install
 
@@ -68,3 +70,9 @@ If using a config file or package.json config, you can pass multiple repositorie
 
 [devdep-image]: https://david-dm.org/tswaters/checkout-install/dev-status.svg
 [devdep-url]: https://david-dm.org/tswaters/checkout-install?type=dev
+
+[coverage-image]: https://coveralls.io/repos/github/tswaters/checkout-install/badge.svg?branch=master
+[coverage-url]: https://coveralls.io/github/tswaters/checkout-install?branch=master
+
+[build-image]: https://travis-ci.org/tswaters/checkout-install.svg?branch=master
+[build-url]: https://travis-ci.org/tswaters/checkout-install
