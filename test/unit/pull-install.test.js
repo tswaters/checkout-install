@@ -1,11 +1,8 @@
 
 const path = require('path')
-const fs = require('fs')
 const assert = require('assert')
 const child_process = require('child_process')
 const pino = require('pino')
-
-const logger = require('../../lib/logger')
 const sinon = require('sinon')
 const proxyquire = require('proxyquire')
 
