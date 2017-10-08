@@ -5,7 +5,7 @@ const path = require('path')
 const yargs = require('yargs')
 const fs = require('fs')
 
-const logger = require('../lib/logger')
+const {default: logger} = require('../lib/logger')
 const ensureConfig = require('../lib/ensure-config')
 const pullInstall = require('../lib/pull-install')
 
@@ -69,8 +69,12 @@ const installer = pullInstall(logger)
   logger.trace(`Running with config: ${util.inspect(config)}`)
 
   if (config.repositories) {
+    logger.setPadding(config.repositories.reduce((item, memo) => {
+      return Math.max(memo, item.name.length)
+    }, 0)) + 1
     await Promise.all(config.repositories.map(installer))
   } else {
+    logger.setPadding(config.name.length + 1)
     await pullInstall(installer)
   }
 
