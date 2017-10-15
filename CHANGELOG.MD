@@ -20,7 +20,7 @@
 
 ## v1.1.0
 
-- create a local branch for upstream tracking if it doesn't exist (thanks @BenHarrington)
+- create a local branch for upstream tracking if it doesn't exist (thanks [BenHarrington](https://github.com/BenHarrington))
 
 ## v1.0.2
 
