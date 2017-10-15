@@ -1,4 +1,8 @@
 
+## v1.2.0
+
+- add ability to run a `post-install` script after finishing installs
+
 ## v1.1.4
 
 - fix completely busted v1.1.3 (my bad!).
