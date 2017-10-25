@@ -80,7 +80,7 @@ const installer = pullInstall(logger)
     await Promise.all(config.repositories.map(installer))
   } else {
     setPadding(config.name.length + 1)
-    await pullInstall(installer)
+    await installer(config)
   }
 
   await postInstall(config)
