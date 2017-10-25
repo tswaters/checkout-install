@@ -1,4 +1,8 @@
 
+## v1.1.5
+
+- fixed single repository run (my bad!).
+
 ## v1.1.4
 
 - fix completely busted v1.1.3 (my bad!).
