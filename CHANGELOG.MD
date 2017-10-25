@@ -1,4 +1,12 @@
 
+## v1.2.1
+
+- fixed single repository run (my bad!).
+
+## v1.2.0
+
+- add ability to run a `post-install` script after finishing installs
+
 ## v1.1.5
 
 - fixed single repository run (my bad!).

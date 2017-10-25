@@ -92,6 +92,11 @@ describe('ensure-config', () => {
       catch (err) { assert.equal(err.message, 'config is malformed, can\'t access here')}
     })
 
+    it('should fail with bad post-install', async () => {
+      try { await ensureConfig({postInstall: {}}); assert.ok(false) }
+      catch (err) { assert.equal(err.message, 'config is malformed, expected postInstall to be a string')}
+    })
+
     it('should fail if repositories not an array', async () => {
       try { await ensureConfig({repositories: 'nope'}); assert.ok(false) }
       catch (err) { assert.equal(err.message, 'config is malformed, expected repositories to be array') }

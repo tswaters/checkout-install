@@ -22,6 +22,7 @@ Options:
   -n, --name      Name to use in logging                                [string]
   -u, --upstream  Upstream branch to pull                    [default: "master"]
   -r, --remote    Remote to pull from                        [default: "origin"]
+  --post-install  Run a script after all operations finish              [string]
   -l, --links     links to setup after install             [array] [default: []]
   --log-level     Logging level to use
          [choices: "trace", "debug", "info", "warn", "error", "fatal", "silent"]

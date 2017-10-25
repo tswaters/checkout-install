@@ -8,6 +8,7 @@ const fs = require('fs')
 const {setPadding, default: logger} = require('../lib/logger')
 const ensureConfig = require('../lib/ensure-config')
 const pullInstall = require('../lib/pull-install')
+const postInstall = require('../lib/post-install')
 
 const config = yargs
   .usage(`
@@ -44,6 +45,10 @@ usage: checkout-install [options]`)
     default: 'origin',
     describe: 'Remote to pull from'
   })
+  .option('post-install', {
+    describe: 'Run a script after all operations finish',
+    type: 'string'
+  })
   .option('l', {
     alias: 'links',
     default: [],
@@ -77,6 +82,8 @@ const installer = pullInstall(logger)
     setPadding(config.name.length + 1)
     await installer(config)
   }
+
+  await postInstall(config)
 
 })()
   .catch(err => logger.fatal(err))

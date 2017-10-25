@@ -1,7 +1,6 @@
 
 const path = require('path')
 const assert = require('assert')
-const child_process = require('child_process')
 const pino = require('pino')
 const sinon = require('sinon')
 const proxyquire = require('proxyquire')
@@ -13,12 +12,14 @@ describe('pull-install', () => {
   let rimrafStub = null
   let execStub = null
   let config = null
+
   const loggerStub = pino({level: 'silent'})
+
   beforeEach(() => {
+    execStub = sinon.stub()
     rimrafStub = sinon.stub().callsArg(1)
-    execStub = sinon.stub(child_process, 'exec').callsArgWith(2, null, {stdout: ''})
     pullInstall = proxyquire('../../lib/pull-install', {
-      child_process: {exec: execStub},
+      './util': {run: sinon.stub().returns(execStub)},
       rimraf: rimrafStub
     })(loggerStub)
     config = {
@@ -30,15 +31,11 @@ describe('pull-install', () => {
     }
   })
 
-  afterEach(() => {
-    child_process.exec.restore()
-  })
-
   it('with local branch missing, checks out and exists without packageJson changes', async () => {
 
-    execStub.onCall(1).callsArgWith(2, null, {stdout: 'some-rando-branch'}) // current branch
-    execStub.onCall(2).callsArgWith(2, null, {stdout: ''}) // can't find master
-    execStub.onCall(3).callsArgWith(2, null, {stdout: ''}) // no changes to packageJson
+    execStub.onCall(1).resolves('some-rando-branch') // current branch
+    execStub.onCall(2).resolves('') // branch list includes upstream
+    execStub.onCall(3).resolves('') // changes to packageJson
 
     await pullInstall(config)
 
@@ -53,9 +50,9 @@ describe('pull-install', () => {
 
   it('with local branch missing, checks out and installs with packageJson changes', async () => {
 
-    execStub.onCall(1).callsArgWith(2, null, {stdout: 'some-rando-branch'}) // current branch
-    execStub.onCall(2).callsArgWith(2, null, {stdout: ''}) // can't find master
-    execStub.onCall(3).callsArgWith(2, null, {stdout: 'some-commit!'}) // package-json changes found
+    execStub.onCall(1).resolves('some-rando-branch') // current branch
+    execStub.onCall(2).resolves('') // branch list includes upstream
+    execStub.onCall(3).resolves('some-commit!') // changes to packageJson
 
     await pullInstall(config)
 
@@ -73,10 +70,10 @@ describe('pull-install', () => {
 
   it('with branch checked out and up-to-date, exits out', async () => {
 
-    execStub.onCall(1).callsArgWith(2, null, {stdout: 'master'}) // current branch
-    execStub.onCall(2).callsArgWith(2, null, {stdout: 'master'}) // master found
-    execStub.onCall(3).callsArgWith(2, null, {stdout: ''}) // changes to tree not found
-    execStub.onCall(4).callsArgWith(2, null, {stdout: ''}) // changes to package not found
+    execStub.onCall(1).resolves('master') // current branch
+    execStub.onCall(2).resolves('master') // branch list includes upstream
+    execStub.onCall(3).resolves('') // changes to tree
+    execStub.onCall(4).resolves('') // changes to packageJson
 
     await pullInstall(config)
 
@@ -90,10 +87,10 @@ describe('pull-install', () => {
   })
 
   it('with branch checked out, not up-to-date but no package.json changes', async () => {
-    execStub.onCall(1).callsArgWith(2, null, {stdout: 'master'}) // current branch
-    execStub.onCall(2).callsArgWith(2, null, {stdout: 'master'}) // master found
-    execStub.onCall(3).callsArgWith(2, null, {stdout: 'some-commit!'}) // changes to tree not found
-    execStub.onCall(4).callsArgWith(2, null, {stdout: ''}) // changes to package not found
+    execStub.onCall(1).resolves('master') // current branch
+    execStub.onCall(2).resolves('master') // branch list includes upstream
+    execStub.onCall(3).resolves('some-commit!') // changes to tree
+    execStub.onCall(4).resolves('') // changes to packageJson
 
     await pullInstall(config)
 
@@ -108,10 +105,10 @@ describe('pull-install', () => {
   })
 
   it('with branch checked out, not up-to-date and package.json changes', async () => {
-    execStub.onCall(1).callsArgWith(2, null, {stdout: 'master'}) // current branch
-    execStub.onCall(2).callsArgWith(2, null, {stdout: 'master'}) // master found
-    execStub.onCall(3).callsArgWith(2, null, {stdout: 'some-commit!'}) // changes to tree not found
-    execStub.onCall(4).callsArgWith(2, null, {stdout: 'some-commit!'}) // changes to package not found
+    execStub.onCall(1).resolves('master') // current branch
+    execStub.onCall(2).resolves('master') // branch list includes upstream
+    execStub.onCall(3).resolves('some-commit!') // changes to tree
+    execStub.onCall(4).resolves('some-commit!') // changes to packageJson
 
     await pullInstall(config)
 
@@ -129,10 +126,10 @@ describe('pull-install', () => {
   })
 
   it('with branch not checked out, not up-to-date and package.json changes', async () => {
-    execStub.onCall(1).callsArgWith(2, null, {stdout: 'some-rando-branch'}) // current branch
-    execStub.onCall(2).callsArgWith(2, null, {stdout: 'master'}) // master found
-    execStub.onCall(3).callsArgWith(2, null, {stdout: 'some-commit!'}) // changes to tree not found
-    execStub.onCall(4).callsArgWith(2, null, {stdout: 'some-commit!'}) // changes to package not found
+    execStub.onCall(1).resolves('some-rando-branch') // current branch
+    execStub.onCall(2).resolves('master') // branch list includes upstream
+    execStub.onCall(3).resolves('some-commit!') // changes to tree
+    execStub.onCall(4).resolves('some-commit!') // changes to packageJson
 
     await pullInstall(config)
 
