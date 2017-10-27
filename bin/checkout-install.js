@@ -68,14 +68,14 @@ const installer = pullInstall(logger)
   await ensureConfig(config)
   logger.trace(`Running with config: ${util.inspect(config)}`)
 
-  if (config.repositories) {
-    setPadding(config.repositories.reduce((memo, item) => {
-      return Math.max(memo, item.name.length)
-    }, 0) + 1)
-    await Promise.all(config.repositories.map(installer))
-  } else {
-    setPadding(config.name.length + 1)
-    await installer(config)
+  const repos = config.repositories ? config.repositories : [config]
+
+  setPadding(repos.reduce((memo, item) => {
+    return Math.max(memo, item.name.length)
+  }, 0) + 1)
+
+  for (const repo of repos) {
+    await installer(repo)
   }
 
   process.exit(0)
