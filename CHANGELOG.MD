@@ -1,4 +1,11 @@
 
+## v1.1.6
+
+- process now exits with code 1 if it failed
+- `checkoutinstallrc` is now loaded as default config file
+- installer now runs in series (should be more reliable)
+- bumping yargs@10 - should be fine
+
 ## v1.1.5
 
 - fixed single repository run (my bad!).
