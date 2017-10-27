@@ -78,5 +78,10 @@ const installer = pullInstall(logger)
     await installer(config)
   }
 
+  process.exit(0)
+
 })()
-  .catch(err => logger.fatal(err))
+  .catch(err => {
+    logger.fatal(err)
+    process.exit(1)
+  })
