@@ -1,0 +1,16 @@
+{
+  "name": "repo-1_upstream",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dep-1": "file:../dep-1",
+    "dep-2": "file:../dep-2"
+  }
+}

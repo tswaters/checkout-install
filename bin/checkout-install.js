@@ -91,7 +91,7 @@ const installer = pullInstall(logger)
   process.exit(0)
 
 })()
-  .catch(err => {
+  .catch( /*istanbul ignore next*/ err => {
     logger.fatal(err)
     process.exit(1)
   })

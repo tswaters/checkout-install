@@ -45,6 +45,7 @@
   "devDependencies": {
     "coveralls": "^3.0.0",
     "eslint": "^4.8.0",
+    "fs-extra": "^4.0.2",
     "mocha": "^4.0.1",
     "nyc": "^11.2.1",
     "proxyquire": "^1.8.0",

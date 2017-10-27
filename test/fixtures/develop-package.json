@@ -1,0 +1,40 @@
+{
+  "name": "develop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "checkout-install": {
+    "repositories": [
+      {
+        "name": "repo-1",
+        "links": [
+          "dep-1",
+          "dep-2"
+        ],
+        "path": "../repo-1_repo"
+      },
+      {
+        "name": "repo-2",
+        "links": [
+          "dep-1",
+          "dep-2"
+        ],
+        "path": "../repo-2_repo"
+      },
+      {
+        "name": "repo-3",
+        "links": [
+          "dep-1",
+          "dep-2"
+        ],
+        "path": "../repo-3_repo"
+      }
+    ]
+  }
+}
