@@ -23,8 +23,18 @@ usage: checkout-install [options]`)
   .option('c', {
     alias: 'config',
     config: true,
+    default: '.checkoutinstallrc',
     configParser (configPath) {
-      return JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+      let result = null
+      try {
+        result = fs.readFileSync(configPath, 'utf-8')
+      } catch (err) {
+        if (err.code === 'ENOENT' && path.join(process.cwd(), '.checkoutinstallrc') === configPath) {
+          return null // if default not found, don't do anything
+        }
+        throw err
+      }
+      return JSON.parse(result)
     },
     type: 'string'
   })
@@ -59,7 +69,7 @@ usage: checkout-install [options]`)
 
 logger.level = config.logLevel
 
-logger.debug(`started ${config.config ? `config path: ${path.resolve(config.config)}` : ''}`)
+logger.debug(`started config path: ${path.resolve(config.config)}`)
 
 const installer = pullInstall(logger)
 

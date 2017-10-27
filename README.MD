@@ -18,7 +18,8 @@ usage: checkout-install [options]
 Options:
   --version, -v   Show version number                                  [boolean]
   --help          Show help                                            [boolean]
-  -c, --config    Path to JSON config file                              [string]
+  -c, --config    Path to JSON config file
+                                        [string] [default: ".checkoutinstallrc"]
   -n, --name      Name to use in logging                                [string]
   -u, --upstream  Upstream branch to pull                    [default: "master"]
   -r, --remote    Remote to pull from                        [default: "origin"]
@@ -31,6 +32,8 @@ Note that you can provide options in the `checkout-install` key in package.json
 ```
 
 You can pass all configuration options through a JSON file via `--config`
+
+Configuration file defaults to `.checkoutinstallrc` - it will be parsed as JSON.
 
 You can also provide a `checkout-install` key inside `package.json`
 
